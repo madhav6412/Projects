@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madhav Gupta | Senior DevOps, Cloud & SRE Portfolio</title>
+    <meta name="description" content="Enterprise DevOps, Cloud & Site Reliability Engineering portfolio showcasing advanced multi-cloud GitOps, DevSecOps pipelines, SRE observability, and IaC architectures with interactive GitHub code exploration." />
+    <meta property="og:title" content="Madhav Gupta | Senior DevOps, Cloud & SRE Portfolio" />
+    <meta property="og:description" content="Enterprise DevOps, Cloud & Site Reliability Engineering portfolio showcasing advanced multi-cloud GitOps, DevSecOps pipelines, SRE observability, and IaC architectures with interactive GitHub code exploration." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/* Safe polyfill for browser extensions attempting to assign window.fetch */}
+    <script>
+      (function() {
+        try {
+          var realFetch = window.fetch;
+          var currentFetch = realFetch;
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return currentFetch;
+            },
+            set: function(newFetch) {
+              currentFetch = newFetch;
+            }
+          });
+        } catch (e) {
+          // ignore error if property is strictly sealed
+        }
+
+        window.addEventListener('error', function(event) {
+          if (event && event.message && event.message.indexOf('fetch') !== -1 && event.message.indexOf('getter') !== -1) {
+            event.preventDefault();
+            event.stopPropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#090d16] text-slate-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-400">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

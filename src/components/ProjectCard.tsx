@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { DevOpsProject } from '../data/projectsData';
-import { FolderGit2, Download, ExternalLink, Check, Star, GitFork, GitCommit } from 'lucide-react';
+import { FolderGit2, Download, ExternalLink, Check, Star, GitFork, GitCommit, Github } from 'lucide-react';
 import { downloadProjectAsZip } from '../utils/zipExporter';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { useTheme } from '../context/ThemeContext';
@@ -314,18 +314,32 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </button>
           </div>
 
-          {/* Raw external GitHub link */}
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className={`text-xs flex items-center gap-1 transition-colors font-mono ${
-              isDark ? 'text-slate-400 hover:text-emerald-400' : 'text-slate-500 hover:text-emerald-600'
-            }`}
-          >
-            <span>github</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
+          {/* In-browser repo viewer & verified GitHub profile link */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => onOpenRepo(project)}
+              className={`text-xs flex items-center gap-1 transition-colors font-mono cursor-pointer ${
+                isDark ? 'text-slate-400 hover:text-emerald-400' : 'text-slate-600 hover:text-emerald-600'
+              }`}
+              title="Open full interactive code explorer"
+            >
+              <span>View Code</span>
+            </button>
+            <span className={isDark ? 'text-slate-700' : 'text-slate-300'}>·</span>
+            <a
+              href="https://github.com/madhav6412"
+              target="_blank"
+              rel="noreferrer"
+              className={`text-xs flex items-center gap-1 transition-colors font-mono ${
+                isDark ? 'text-slate-400 hover:text-emerald-400' : 'text-slate-500 hover:text-emerald-600'
+              }`}
+              title="Visit Madhav's verified GitHub profile (@madhav6412)"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>@madhav6412</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
+          </div>
         </div>
       </motion.article>
     </div>

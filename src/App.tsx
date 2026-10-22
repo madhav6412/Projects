@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { PROJECTS_DATA, DevOpsProject, ProjectTier } from './data/projectsData';
+import { PROFILE_DATA } from './data/profileData';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProjectFilterTabs } from './components/ProjectFilterTabs';
@@ -296,6 +297,7 @@ function PortfolioContent() {
       <PdfViewerModal
         isOpen={isResumeModalOpen}
         onClose={() => setIsResumeModalOpen(false)}
+        pdfUrl={PROFILE_DATA.contact.resumeUrl}
       />
     </div>
   );

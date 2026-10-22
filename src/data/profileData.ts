@@ -34,7 +34,7 @@ export const PROFILE_DATA = {
     linkedin: "https://www.linkedin.com/in/madhav-gupta-77048b140/",
     github: "https://github.com/madhav6412",
     location: "Ujjain, Madhya Pradesh, India",
-    resumeUrl: "/assets/aistudio/cv_0f3dcf82.pdf",
+    resumeUrl: "/assets/aistudio/cv_5d43cdc1.pdf",
   },
   summary:
     "Cloud Engineer, DevOps Engineer, and Site Reliability Engineer (SRE) with 4+ years building and operating mission-critical cloud infrastructure, GitOps pipelines, and production support across Azure and AWS. Specialist in enterprise ThingWorx IIoT platform reliability, multi-cluster Kubernetes (AKS, EKS), Terraform & Bicep IaC automation, zero-downtime deployment pipelines, and proactive observability with Prometheus, Grafana, and Sumo Logic.",

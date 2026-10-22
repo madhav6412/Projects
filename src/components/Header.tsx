@@ -1,13 +1,14 @@
 import React from 'react';
-import { FileText, Sun, Moon } from 'lucide-react';
+import { FileText, Sun, Moon, Github } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 interface HeaderProps {
   onOpenResume: () => void;
   onSelectAdvanced?: () => void;
+  onOpenGitHubGuide?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onOpenResume, onSelectAdvanced }) => {
+export const Header: React.FC<HeaderProps> = ({ onOpenResume, onSelectAdvanced, onOpenGitHubGuide }) => {
   const { isDark, toggleTheme } = useTheme();
 
   const handleAdvancedClick = (e: React.MouseEvent) => {
@@ -83,7 +84,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResume, onSelectAdvanced }
         </nav>
 
         {/* Zone 3: Actions + Theme Switcher */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
           {/* Light/Dark Toggle */}
           <button
             onClick={toggleTheme}
@@ -97,6 +98,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenResume, onSelectAdvanced }
           >
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
+
+          {/* GitHub Repository Creation Guide Button */}
+          {onOpenGitHubGuide && (
+            <button
+              onClick={onOpenGitHubGuide}
+              className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors cursor-pointer ${
+                isDark
+                  ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'
+                  : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-300 shadow-xs'
+              }`}
+              title="Step-by-step commands to create GitHub repository"
+            >
+              <Github className="w-3.5 h-3.5 text-slate-500" />
+              <span>Create Repo</span>
+            </button>
+          )}
 
           <button
             onClick={onOpenResume}

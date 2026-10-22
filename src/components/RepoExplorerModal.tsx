@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DevOpsProject, ProjectFile } from '../data/projectsData';
-import { X, FileCode, Copy, Check, Download, ExternalLink, GitBranch, BarChart3, Code2 } from 'lucide-react';
+import { X, FileCode, Copy, Check, Download, ExternalLink, GitBranch, BarChart3, Code2, Github } from 'lucide-react';
 import { downloadProjectAsZip } from '../utils/zipExporter';
 import { ProjectImpactChart } from './ProjectImpactChart';
 import { useTheme } from '../context/ThemeContext';
@@ -228,12 +228,14 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
               }`}>
                 <span>Repository Files ({project.files.length})</span>
                 <a
-                  href={project.githubUrl}
+                  href="https://github.com/madhav6412"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-emerald-500 flex items-center gap-1"
+                  className="hover:text-emerald-500 flex items-center gap-1 font-mono text-[11px]"
+                  title="Visit Madhav's verified GitHub profile"
                 >
-                  <span>github</span>
+                  <Github className="w-3 h-3" />
+                  <span>@madhav6412</span>
                   <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </div>

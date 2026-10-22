@@ -11,7 +11,7 @@ interface PdfViewerModalProps {
 export const PdfViewerModal: React.FC<PdfViewerModalProps> = ({
   isOpen,
   onClose,
-  pdfUrl = '/assets/aistudio/cv_0f3dcf82.pdf',
+  pdfUrl = '/assets/aistudio/cv_5d43cdc1.pdf',
 }) => {
   const { isDark } = useTheme();
 

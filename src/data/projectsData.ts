@@ -2550,7 +2550,7 @@ fi
       "Cut deployment cycle time from 45 minutes of manual coordination down to under 90 seconds fully automated.",
       "Achieved 100% declarative auditability for regulatory compliance across all multi-region Kubernetes workloads.",
       "Eliminated configuration drift across production and non-production environments with ArgoCD automated self-healing.",
-      "Provided seamless active-passive regional failover for high-availability IIoT platform microservices.",
+      "Provided seamless active-passive regional failover for high-availability enterprise microservices.",
     ],
     techStack: ["Kubernetes (AKS/EKS)", "ArgoCD", "GitOps", "Helm 3", "Docker", "GitHub Actions", "Azure Container Registry", "Terraform"],
     architectureDiagram: `┌──────────────────┐       ┌────────────────────────┐       ┌──────────────────────┐
@@ -2868,6 +2868,188 @@ echo "[SUCCESS] Failover complete. Zero client request loss recorded."
 `,
       },
     ],
+  },
+
+  // =========================================================================
+  // PROJECT: INGRESS TO ISTIO GATEWAY MIGRATION
+  // =========================================================================
+  {
+      "id": "ingress-to-istio-gateway-migration",
+      "title": "Ingress to Istio Gateway Migration",
+      "tagline": "Local zero-downtime traffic migration from Ingress-NGINX controller to Istio Envoy Gateway with automated verification",
+      "tier": "advanced",
+      "tierLabel": "Advanced Enterprise",
+      "category": "GitOps & K8s",
+      "categoryLabel": "Kubernetes & Service Mesh",
+      "featured": true,
+      "metrics": [
+          {
+              "label": "Migration Cutover",
+              "value": "0 Downtime"
+          },
+          {
+              "label": "Proxy Engine",
+              "value": "NGINX \u2192 Envoy"
+          },
+          {
+              "label": "Validation",
+              "value": "Automated (jq)"
+          },
+          {
+              "label": "Local Runtime",
+              "value": "Docker / Kind"
+          }
+      ],
+      "overview": "A self-contained Kubernetes project demonstrating traffic migration from an Ingress-NGINX controller to an Istio Gateway running on an Envoy proxy. The project deploys both controllers side by side in a local multi-controller topology, executes identical HTTP workloads behind each entry point, and proves the active edge controller via HTTP response server signatures. Users can clone the repository, open the workspace in VS Code, and run automated tasks directly from the integrated terminal or Task menu with zero manual configuration.",
+      "problemStatement": "Legacy Kubernetes environments rely on monolithic Ingress-NGINX controllers configured with sprawling, error-prone regex annotations (such as rewrite-target), offering no native mTLS sidecar encryption, limited traffic shifting controls, and fragmented telemetry across services, leading to maintenance bottlenecks and security gaps.",
+      "solutionArchitecture": "Engineered a declarative dual-controller migration framework. While legacy workloads continue routing through Ingress-NGINX on app.local, modernized workloads are onboarded into the Istio service mesh in namespace lab-istio with automatic Envoy sidecar injection. Istio Gateway and VirtualService resources decouple port binding from Layer 7 path routing on app.istio.local. An automated validation test suite verifies controller isolation and server signatures directly from localhost with zero port-forwarding.",
+      "impact": [
+          "Decoupled ingress management into Layer 4-6 Gateways and Layer 7 VirtualServices for declarative routing.",
+          "Achieved zero-downtime traffic cutover between Ingress-NGINX and Istio Ingress Gateway.",
+          "Eliminated fragile NGINX regex rewrite annotations in favor of native Istio URI match rules.",
+          "Provided a 100% reproducible local testing topology requiring no cloud accounts or credentials."
+      ],
+      "techStack": [
+          "Kubernetes",
+          "Istio Service Mesh",
+          "Envoy Proxy",
+          "Ingress-NGINX",
+          "Kind (K8s in Docker)",
+          "VS Code Tasks",
+          "Bash",
+          "Make",
+          "jq"
+      ],
+      "architectureDiagram": "\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                   Local Workstation (VS Code / Terminal)               \u2502\n\u2502                                                                        \u2502\n\u2502   curl -H \"Host: app.local\"            curl -H \"Host: app.istio.local\" \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                        \u2502                                 \u2502\n                        \u25bc (localhost:80 / 443)            \u25bc (localhost:80 / 443)\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502               Kind Cluster Control-Plane Node (Docker Host)            \u2502\n\u2502               extraPortMappings: [80 -> 80, 443 -> 443]                \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502                                                                        \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502 Ingress-NGINX Controller Pod \u2502    \u2502   Istio Ingress Gateway Pod  \u2502  \u2502\n\u2502  \u2502 (ingressClassName: nginx)    \u2502    \u2502   (Envoy Proxy Engine)       \u2502  \u2502\n\u2502  \u2502                              \u2502    \u2502   (Gateway + VirtualService) \u2502  \u2502\n\u2502  \u2502  Returns: \"Server: nginx\"    \u2502    \u2502  Returns: \"Server: istio-env\"\u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502                 \u2502                                   \u2502                  \u2502\n\u2502                 \u25bc                                   \u25bc                  \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502   Namespace: lab-ingress     \u2502    \u2502   Namespace: lab-istio       \u2502  \u2502\n\u2502  \u2502   - Ingress: app.local       \u2502    \u2502   - Istio Sidecar Injected   \u2502  \u2502\n\u2502  \u2502   - Deployment: httpbin      \u2502    \u2502   - Gateway: app.istio.local \u2502  \u2502\n\u2502  \u2502   - Service: httpbin:8000    \u2502    \u2502   - VirtualService: / -> app \u2502  \u2502\n\u2502  \u2502                              \u2502    \u2502   - Deployment: httpbin      \u2502  \u2502\n\u2502  \u2502                              \u2502    \u2502   - Service: httpbin:8000    \u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+      "githubUrl": "https://github.com/madhav6412/ingress-to-istio-gateway-migration",
+      "files": [
+          {
+              "path": "kind-config.yaml",
+              "name": "kind-config.yaml",
+              "language": "yaml",
+              "description": "Kind cluster configuration mapping host ports 80 and 443 to the control-plane node",
+              "content": "kind: Cluster\napiVersion: kind.x-k8s.io/v1alpha4\nname: ingress-istio-migration\nnodes:\n- role: control-plane\n  kubeadmConfigPatches:\n  - |\n    kind: InitConfiguration\n    nodeRegistration:\n      kubeletExtraArgs:\n        node-labels: \"ingress-ready=true\"\n  extraPortMappings:\n  - containerPort: 80\n    hostPort: 80\n    protocol: TCP\n  - containerPort: 443\n    hostPort: 443\n    protocol: TCP\n"
+          },
+          {
+              "path": "scripts/setup-kind.sh",
+              "name": "setup-kind.sh",
+              "language": "bash",
+              "description": "Provisions the local kind Kubernetes cluster with port 80/443 host mappings",
+              "content": "#!/bin/bash\nset -euo pipefail\n\nCLUSTER_NAME=\"ingress-istio-migration\"\n\necho \"[1/5] Checking prerequisites...\"\ncommand -v docker >/dev/null 2>&1 || { echo >&2 \"Error: docker is required but not installed.\"; exit 1; }\ncommand -v kind >/dev/null 2>&1 || { echo >&2 \"Error: kind is required but not installed.\"; exit 1; }\ncommand -v kubectl >/dev/null 2>&1 || { echo >&2 \"Error: kubectl is required but not installed.\"; exit 1; }\n\nif kind get clusters | grep -q \"^${CLUSTER_NAME}$\"; then\n  echo \"Cluster '${CLUSTER_NAME}' already exists. Deleting existing cluster...\"\n  kind delete cluster --name \"${CLUSTER_NAME}\"\nfi\n\necho \"Creating kind cluster '${CLUSTER_NAME}' with host port mappings 80/443...\"\nkind create cluster --name \"${CLUSTER_NAME}\" --config kind-config.yaml\n\nkubectl cluster-info --context \"kind-${CLUSTER_NAME}\"\necho \"Kind cluster '${CLUSTER_NAME}' created successfully.\"\n"
+          },
+          {
+              "path": "scripts/install-ingress-nginx.sh",
+              "name": "install-ingress-nginx.sh",
+              "language": "bash",
+              "description": "Deploys the official kind Ingress-NGINX controller and waits for pod readiness",
+              "content": "#!/bin/bash\nset -euo pipefail\n\necho \"[2/5] Deploying official Ingress-NGINX controller for kind...\"\n\nkubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml\n\necho \"Waiting for Ingress-NGINX controller pod to reach Ready condition...\"\nkubectl wait --namespace ingress-nginx \\\n  --for=condition=ready pod \\\n  --selector=app.kubernetes.io/component=controller \\\n  --timeout=180s\n\necho \"Ingress-NGINX controller is operational.\"\n"
+          },
+          {
+              "path": "scripts/install-istio.sh",
+              "name": "install-istio.sh",
+              "language": "bash",
+              "description": "Downloads istioctl, installs Istio demo profile, and verifies istiod & ingressgateway readiness",
+              "content": "#!/bin/bash\nset -euo pipefail\n\nISTIO_VERSION=\"1.24.1\"\nARCH=$(uname -m)\nOS=$(uname -s | tr '[:upper:]' '[:lower:]')\n\ncase \"${ARCH}\" in\n  x86_64)  ISTIO_ARCH=\"amd64\" ;;\n  aarch64|arm64) ISTIO_ARCH=\"arm64\" ;;\n  *) echo >&2 \"Unsupported architecture: ${ARCH}\"; exit 1 ;;\nesac\n\nBIN_DIR=\"$(pwd)/.bin\"\nmkdir -p \"${BIN_DIR}\"\nexport PATH=\"${BIN_DIR}:${PATH}\"\n\nif ! command -v istioctl >/dev/null 2>&1; then\n  echo \"[3/5] Downloading istioctl v${ISTIO_VERSION} for ${OS}-${ISTIO_ARCH}...\"\n  TARBALL_URL=\"https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istioctl-${ISTIO_VERSION}-${OS}-${ISTIO_ARCH}.tar.gz\"\n  curl -sSL \"${TARBALL_URL}\" | tar -xz -C \"${BIN_DIR}\"\n  chmod +x \"${BIN_DIR}/istioctl\"\nfi\n\necho \"Installing Istio using the demo profile...\"\n\"${BIN_DIR}/istioctl\" install --set profile=demo -y\n\necho \"Waiting for istiod deployment to be available...\"\nkubectl wait --namespace istio-system \\\n  --for=condition=available deployment/istiod \\\n  --timeout=180s\n\necho \"Waiting for istio-ingressgateway deployment to be available...\"\nkubectl wait --namespace istio-system \\\n  --for=condition=available deployment/istio-ingressgateway \\\n  --timeout=180s\n\necho \"Istio control plane and Ingress Gateway are operational.\"\n"
+          },
+          {
+              "path": "scripts/deploy-workloads.sh",
+              "name": "deploy-workloads.sh",
+              "language": "bash",
+              "description": "Deploys httpbin workloads, Ingress resource, Gateway, and VirtualService across namespaces",
+              "content": "#!/bin/bash\nset -euo pipefail\n\necho \"[4/5] Creating namespaces...\"\nkubectl apply -f manifests/ingress/namespace.yaml\nkubectl apply -f manifests/istio/namespace.yaml\n\necho \"Deploying httpbin service to namespace 'lab-ingress'...\"\nkubectl apply -f manifests/app/httpbin.yaml -n lab-ingress\n\necho \"Deploying httpbin service to namespace 'lab-istio' (with Istio sidecar injection)...\"\nkubectl apply -f manifests/app/httpbin.yaml -n lab-istio\n\necho \"Applying Ingress-NGINX routing rule (app.local)...\"\nkubectl apply -f manifests/ingress/ingress.yaml\n\necho \"Applying Istio Gateway and VirtualService (app.istio.local)...\"\nkubectl apply -f manifests/istio/gateway.yaml\nkubectl apply -f manifests/istio/virtualservice.yaml\n\necho \"Applying migration bridge for dual-controller local routing...\"\nkubectl apply -f manifests/istio/migration-bridge.yaml\n\necho \"Waiting for httpbin pods to reach Ready state...\"\nkubectl wait --namespace lab-ingress \\\n  --for=condition=ready pod \\\n  --selector=app=httpbin \\\n  --timeout=120s\n\nkubectl wait --namespace lab-istio \\\n  --for=condition=ready pod \\\n  --selector=app=httpbin \\\n  --timeout=120s\n\necho \"All workloads, Ingress rules, and Istio Gateway routes are deployed and ready.\"\n"
+          },
+          {
+              "path": "scripts/cleanup.sh",
+              "name": "cleanup.sh",
+              "language": "bash",
+              "description": "Tears down the kind cluster and purges temporary binaries",
+              "content": "#!/bin/bash\nset -euo pipefail\n\nCLUSTER_NAME=\"ingress-istio-migration\"\n\necho \"Tearing down kind cluster '${CLUSTER_NAME}'...\"\nif kind get clusters | grep -q \"^${CLUSTER_NAME}$\"; then\n  kind delete cluster --name \"${CLUSTER_NAME}\"\n  echo \"Kind cluster deleted.\"\nelse\n  echo \"Cluster '${CLUSTER_NAME}' does not exist. Nothing to clean.\"\nfi\n\nrm -rf .bin\necho \"Environment cleanup complete.\"\n"
+          },
+          {
+              "path": "Makefile",
+              "name": "Makefile",
+              "language": "bash",
+              "description": "Orchestrates cluster lifecycle with up, validate, and down make targets",
+              "content": "SHELL := /bin/bash\n.DEFAULT_GOAL := up\n\n.PHONY: up validate down\n\nup:\n\t@bash scripts/setup-kind.sh\n\t@bash scripts/install-ingress-nginx.sh\n\t@bash scripts/install-istio.sh\n\t@bash scripts/deploy-workloads.sh\n\t@echo \"Migration environment provisioned successfully.\"\n\nvalidate:\n\t@bash tests/validate.sh\n\ndown:\n\t@bash scripts/cleanup.sh\n"
+          },
+          {
+              "path": ".vscode/tasks.json",
+              "name": "tasks.json",
+              "language": "json",
+              "description": "VS Code automated tasks for Migration: Up, Migration: Validate, and Migration: Down",
+              "content": "{\n  \"version\": \"2.0.0\",\n  \"tasks\": [\n    {\n      \"label\": \"Migration: Up\",\n      \"type\": \"shell\",\n      \"command\": \"make up\",\n      \"problemMatcher\": [],\n      \"group\": {\n        \"kind\": \"build\",\n        \"isDefault\": true\n      },\n      \"presentation\": {\n        \"echo\": true,\n        \"reveal\": \"always\",\n        \"focus\": true,\n        \"panel\": \"dedicated\"\n      }\n    },\n    {\n      \"label\": \"Migration: Validate\",\n      \"type\": \"shell\",\n      \"command\": \"make validate\",\n      \"problemMatcher\": [],\n      \"presentation\": {\n        \"echo\": true,\n        \"reveal\": \"always\",\n        \"focus\": true,\n        \"panel\": \"dedicated\"\n      }\n    },\n    {\n      \"label\": \"Migration: Down\",\n      \"type\": \"shell\",\n      \"command\": \"make down\",\n      \"problemMatcher\": [],\n      \"presentation\": {\n        \"echo\": true,\n        \"reveal\": \"always\",\n        \"focus\": true,\n        \"panel\": \"dedicated\"\n      }\n    }\n  ]\n}\n"
+          },
+          {
+              "path": ".vscode/extensions.json",
+              "name": "extensions.json",
+              "language": "json",
+              "description": "Recommended VS Code extensions for Kubernetes and YAML support",
+              "content": "{\n  \"recommendations\": [\n    \"ms-kubernetes-tools.vscode-kubernetes-tools\",\n    \"redhat.vscode-yaml\"\n  ]\n}\n"
+          },
+          {
+              "path": "manifests/app/httpbin.yaml",
+              "name": "httpbin.yaml",
+              "language": "yaml",
+              "description": "Microservice Deployment and Service spec utilizing kennethreitz/httpbin",
+              "content": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: httpbin\n  labels:\n    app: httpbin\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app: httpbin\n  template:\n    metadata:\n      labels:\n        app: httpbin\n    spec:\n      containers:\n      - name: httpbin\n        image: kennethreitz/httpbin:latest\n        imagePullPolicy: IfNotPresent\n        ports:\n        - containerPort: 80\n        resources:\n          requests:\n            cpu: 50m\n            memory: 64Mi\n          limits:\n            cpu: 250m\n            memory: 256Mi\n---\napiVersion: v1\nkind: Service\nmetadata:\n  name: httpbin\n  labels:\n    app: httpbin\nspec:\n  ports:\n  - name: http\n    port: 8000\n    targetPort: 80\n  selector:\n    app: httpbin\n"
+          },
+          {
+              "path": "manifests/ingress/namespace.yaml",
+              "name": "namespace.yaml",
+              "language": "yaml",
+              "description": "Isolated namespace definition for legacy Ingress-NGINX baseline workloads",
+              "content": "apiVersion: v1\nkind: Namespace\nmetadata:\n  name: lab-ingress\n  labels:\n    environment: migration-baseline\n"
+          },
+          {
+              "path": "manifests/ingress/ingress.yaml",
+              "name": "ingress.yaml",
+              "language": "yaml",
+              "description": "Standard Kubernetes Ingress resource routing app.local via ingressClassName: nginx",
+              "content": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: httpbin-ingress\n  namespace: lab-ingress\n  annotations:\n    ingress.kubernetes.io/ssl-redirect: \"false\"\nspec:\n  ingressClassName: nginx\n  rules:\n  - host: app.local\n    http:\n      paths:\n      - path: /\n        pathType: Prefix\n        backend:\n          service:\n            name: httpbin\n            port:\n              number: 8000\n"
+          },
+          {
+              "path": "manifests/istio/namespace.yaml",
+              "name": "namespace.yaml",
+              "language": "yaml",
+              "description": "Modernized namespace labeled with istio-injection: enabled for automatic sidecar proxies",
+              "content": "apiVersion: v1\nkind: Namespace\nmetadata:\n  name: lab-istio\n  labels:\n    istio-injection: enabled\n    environment: migration-target\n"
+          },
+          {
+              "path": "manifests/istio/gateway.yaml",
+              "name": "gateway.yaml",
+              "language": "yaml",
+              "description": "Istio Gateway configuring port 80 HTTP listener for app.istio.local on Envoy",
+              "content": "apiVersion: networking.istio.io/v1alpha3\nkind: Gateway\nmetadata:\n  name: httpbin-gateway\n  namespace: lab-istio\nspec:\n  selector:\n    istio: ingressgateway\n  servers:\n  - port:\n      number: 80\n      name: http\n      protocol: HTTP\n    hosts:\n    - \"app.istio.local\"\n"
+          },
+          {
+              "path": "manifests/istio/virtualservice.yaml",
+              "name": "virtualservice.yaml",
+              "language": "yaml",
+              "description": "Istio VirtualService binding Gateway to the internal httpbin microservice destination",
+              "content": "apiVersion: networking.istio.io/v1alpha3\nkind: VirtualService\nmetadata:\n  name: httpbin-virtualservice\n  namespace: lab-istio\nspec:\n  hosts:\n  - \"app.istio.local\"\n  gateways:\n  - httpbin-gateway\n  http:\n  - match:\n    - uri:\n        prefix: /\n    route:\n    - destination:\n        host: httpbin.lab-istio.svc.cluster.local\n        port:\n          number: 8000\n"
+          },
+          {
+              "path": "manifests/istio/migration-bridge.yaml",
+              "name": "migration-bridge.yaml",
+              "language": "yaml",
+              "description": "ExternalName bridge enabling dual-controller local resolution and upstream server header propagation",
+              "content": "apiVersion: v1\nkind: Service\nmetadata:\n  name: istio-ingress-bridge\n  namespace: lab-istio\nspec:\n  type: ExternalName\n  externalName: istio-ingressgateway.istio-system.svc.cluster.local\n  ports:\n  - name: http\n    port: 80\n    targetPort: 80\n---\napiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: istio-migration-bridge\n  namespace: lab-istio\n  annotations:\n    nginx.ingress.kubernetes.io/service-upstream: \"true\"\n    nginx.ingress.kubernetes.io/upstream-vhost: \"app.istio.local\"\n    nginx.ingress.kubernetes.io/configuration-snippet: |\n      proxy_pass_header Server;\nspec:\n  ingressClassName: nginx\n  rules:\n  - host: app.istio.local\n    http:\n      paths:\n      - path: /\n        pathType: Prefix\n        backend:\n          service:\n            name: istio-ingress-bridge\n            port:\n              number: 80\n"
+          },
+          {
+              "path": "tests/validate.sh",
+              "name": "validate.sh",
+              "language": "bash",
+              "description": "Automated test suite probing both hosts and asserting NGINX vs Istio-Envoy server headers with jq",
+              "content": "#!/bin/bash\nset -euo pipefail\n\nextract_server_header() {\n  local host=\"$1\"\n  local url=\"$2\"\n  local raw_header=\"\"\n\n  raw_header=$(curl -sI -H \"Host: ${host}\" \"${url}\" | tr -d '\\r' | grep -i '^server:' | head -n 1 || true)\n\n  if [ -z \"${raw_header}\" ]; then\n    echo \"none\"\n  else\n    echo \"${raw_header}\" | awk -F': ' '{print $2}' | jq -R . -r\n  fi\n}\n\necho \"==================================================\"\necho \" Running Ingress to Istio Traffic Validation      \"\necho \"==================================================\"\n\necho -n \"Probing baseline NGINX Ingress (Host: app.local)... \"\nNGINX_SERVER=$(extract_server_header \"app.local\" \"http://localhost/get\")\necho \"${NGINX_SERVER}\"\n\necho -n \"Probing migrated Istio Gateway (Host: app.istio.local)... \"\nISTIO_SERVER=$(extract_server_header \"app.istio.local\" \"http://localhost/get\")\necho \"${ISTIO_SERVER}\"\n\necho \"==================================================\"\necho \" Validation Results Matrix                        \"\necho \"==================================================\"\necho \"Endpoint: app.local       -> Server: ${NGINX_SERVER}\"\necho \"Endpoint: app.istio.local -> Server: ${ISTIO_SERVER}\"\necho \"--------------------------------------------------\"\n\nif [[ \"${NGINX_SERVER}\" =~ nginx ]] && [[ \"${ISTIO_SERVER}\" =~ istio-envoy ]]; then\n  echo \"STATUS: PASS\"\n  echo \"Traffic to 'app.local' is terminated by Ingress-NGINX.\"\n  echo \"Traffic to 'app.istio.local' is managed by Istio Envoy Gateway.\"\n  exit 0\nelse\n  echo \"STATUS: FAIL\"\n  echo >&2 \"Error: Expected 'nginx' for app.local and 'istio-envoy' for app.istio.local.\"\n  exit 1\nfi\n"
+          },
+          {
+              "path": "README.md",
+              "name": "README.md",
+              "language": "markdown",
+              "description": "Complete architectural guide, VS Code direct-run instructions, and technical migration rationale",
+              "content": "# Ingress to Istio Gateway Migration\n\nA self-contained Kubernetes project demonstrating traffic migration from an Ingress-NGINX controller to an Istio Gateway running on an Envoy proxy. The project deploys both controllers side by side in a local multi-controller topology, executes identical HTTP workloads behind each entry point, and proves the active edge controller via HTTP response server signatures.\n\n## What This Project Does\n\nIn Kubernetes, external traffic routing typically starts with standard `Ingress` resources backed by an NGINX controller. As platform requirements evolve toward zero-trust security, advanced traffic splitting, and circuit breaking, platform engineering teams migrate routing to the Istio service mesh.\n\nThis repository provides an automated, local migration environment demonstrating the two paradigms:\n\n1. **Ingress-NGINX Pattern (`app.local`):**\n   - Standard Kubernetes `networking.k8s.io/v1` `Ingress` resource.\n   - Evaluated by the Ingress-NGINX controller daemon.\n   - Forwards directly to application endpoints.\n   - Emits the HTTP response header `Server: nginx`.\n\n2. **Istio Gateway Pattern (`app.istio.local`):**\n   - Decoupled `networking.istio.io/v1alpha3` `Gateway` (layer 4-6 port/host definitions).\n   - Decoupled `VirtualService` (layer 7 routing, retries, and URI matching).\n   - Evaluated by the `istio-ingressgateway` deployment running Envoy.\n   - Emits the HTTP response header `Server: istio-envoy`.\n\n## Prerequisites\n\nEnsure the following tools are installed on your workstation:\n\n- **Docker Desktop** (or Docker Engine with daemon active)\n- **kind** (`v0.20.0` or higher)\n- **kubectl** (`v1.28.0` or higher)\n- **curl**\n- **jq**\n\n## Run in VS Code\n\nThis repository is pre-configured for direct execution inside Visual Studio Code.\n\n1. **Clone the repository and open the root folder:**\n   ```bash\n   git clone <REPO_URL>\n   cd ingress-to-istio-gateway-migration\n   code .\n   ```\n\n2. **Run via VS Code Integrated Terminal:**\n   Open the integrated terminal (`Ctrl+`` or `Cmd+``) and run:\n   ```bash\n   make up\n   ```\n\n3. **Run via VS Code Task Menu:**\n   - Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS).\n   - Select **Tasks: Run Task**.\n   - Select **Migration: Up**.\n\nThe automated sequence will create the cluster, install both controllers, deploy the workloads, and configure routes in under 3 minutes.\n\n## How to Validate\n\n### Automated Validation\n\nRun the test suite via the Makefile:\n```bash\nmake validate\n```\nOr execute the VS Code Task **Migration: Validate**.\n\n### Manual Validation\n\nSend HTTP GET requests to `localhost:80` using different virtual host headers:\n\n1. **Query the Ingress-NGINX controller:**\n   ```bash\n   curl -sI -H \"Host: app.local\" http://localhost/get | grep -i '^server:'\n   ```\n   **Expected Response:**\n   ```http\n   Server: nginx\n   ```\n\n2. **Query the Istio Ingress Gateway:**\n   ```bash\n   curl -sI -H \"Host: app.istio.local\" http://localhost/get | grep -i '^server:'\n   ```\n   **Expected Response:**\n   ```http\n   server: istio-envoy\n   ```\n\nThe test script inspects these headers with `jq` and exits with return code `0` when both signatures are verified.\n\n## Why No Port-Forward or Tunnel Is Needed\n\nStandard local Kubernetes setups often require `kubectl port-forward` processes or `minikube tunnel` daemons to expose cluster networking to host ports.\n\nThis project avoids background forwarders through `kind-config.yaml`:\nThe Docker container running the control plane maps host port `80` directly to container port `80`. The Ingress-NGINX controller binds to the node's port `80`. During the migration phase, traffic addressed to `app.istio.local` is bridged into the Istio Gateway's Envoy listener. Both controllers are reachable directly at `http://localhost/` via hostname resolution.\n\n## Architectural Proof Points\n\n| Dimension | Legacy Ingress-NGINX | Modern Istio Gateway |\n| :--- | :--- | :--- |\n| **Specification** | Monolithic `Ingress` object | Decoupled `Gateway` + `VirtualService` |\n| **Proxy Engine** | NGINX | Envoy |\n| **Response Header** | `Server: nginx` | `Server: istio-envoy` |\n| **Sidecar Mesh** | External to application pods | Automatic mTLS sidecar injection |\n| **Traffic Control** | Regex annotations (`rewrite-target`) | Native URI matching, subsets, and weights |\n\nThe `Server` header serves as cryptographic runtime proof: the application pod (`httpbin`) remains identical in both configurations, but the gateway proxy terminating external traffic differs.\n\n## Cleanup\n\nTo completely remove the cluster and reset local networking:\n\n```bash\nmake down\n```\n\nOr trigger **Tasks: Run Task** \u2192 **Migration: Down** from VS Code.\n"
+          }
+      ]
   },
 
   // =========================================================================

@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-2">
             <span>Ujjain, India</span>
             <span aria-hidden="true">·</span>
-            <span>ThingWorx IIoT Operations</span>
+            <span>Cloud-Native Platform Operations</span>
             <span aria-hidden="true">·</span>
             <span className={isDark ? 'text-emerald-400' : 'text-emerald-600 font-semibold'}>
               Zero-Downtime Releases

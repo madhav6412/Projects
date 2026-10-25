@@ -107,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({
           </span>
           <span aria-hidden="true" className={isDark ? 'text-slate-600' : 'text-slate-300'}>·</span>
           <span className={isDark ? 'text-cyan-400' : 'text-sky-600'}>
-            Enterprise ThingWorx IIoT
+            Enterprise Cloud-Native Platforms
           </span>
           <span aria-hidden="true" className={isDark ? 'text-slate-600' : 'text-slate-300'}>·</span>
           <span className={isDark ? 'text-slate-400' : 'text-slate-500'}>

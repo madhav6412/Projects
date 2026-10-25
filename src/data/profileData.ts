@@ -37,7 +37,7 @@ export const PROFILE_DATA = {
     resumeUrl: "/assets/aistudio/cv_5d43cdc1.pdf",
   },
   summary:
-    "Cloud Engineer, DevOps Engineer, and Site Reliability Engineer (SRE) with 4+ years building and operating mission-critical cloud infrastructure, GitOps pipelines, and production support across Azure and AWS. Specialist in enterprise ThingWorx IIoT platform reliability, multi-cluster Kubernetes (AKS, EKS), Terraform & Bicep IaC automation, zero-downtime deployment pipelines, and proactive observability with Prometheus, Grafana, and Sumo Logic.",
+    "Cloud Engineer, DevOps Engineer, and Site Reliability Engineer (SRE) with 4+ years building and operating mission-critical cloud infrastructure, GitOps pipelines, and production support across Azure and AWS. Specialist in enterprise cloud-native platform reliability, multi-cluster Kubernetes (AKS, EKS), Terraform & Bicep IaC automation, zero-downtime deployment pipelines, and proactive observability with Prometheus, Grafana, and Sumo Logic.",
   metrics: [
     { label: "Cloud Experience", value: "4+ Years", detail: "Azure, AWS & Hybrid Clouds" },
     { label: "Engineering Teams Supported", value: "100+", detail: "Wireline & Wireless Domains" },
@@ -51,7 +51,7 @@ export const PROFILE_DATA = {
     { category: "CI/CD & GitOps Automation", items: ["ArgoCD", "GitHub Actions", "Jenkins CI/CD", "Bitbucket Pipelines", "Zero-Downtime Canary / Blue-Green", "GitOps Synchronizations"] },
     { category: "Observability & Site Reliability", items: ["Prometheus & Alertmanager", "Grafana Dashboards", "Sumo Logic", "Zabbix", "New Relic & NRQL", "SLIs / SLOs / Error Budgets", "Incident RCA & Runbooks"] },
     { category: "Security & Networking", items: ["Azure Key Vault", "Azure DNS & Traffic Manager", "Cross-Subscription Load Balancers", "Network Security Groups (NSGs)", "Azure RBAC & Managed Identity", "DAST / Apache Hardening", "Trivy & Kyverno"] },
-    { category: "Scripting & Tooling", items: ["Python Automation", "Bash & Shell Scripting", "PowerShell", "Linux (RHEL, Ubuntu)", "ServiceNow & JIRA", "ThingWorx IIoT Platform"] },
+    { category: "Scripting & Tooling", items: ["Python Automation", "Bash & Shell Scripting", "PowerShell", "Linux (RHEL, Ubuntu)", "ServiceNow & JIRA", "Cloud Shell / CLI"] },
   ],
   experiences: [
     {
@@ -61,16 +61,16 @@ export const PROFILE_DATA = {
       period: "Oct 2026 – Present",
       location: "Remote",
       type: "Full-Time",
-      context: "Multi-region Azure/AWS supporting enterprise ThingWorx IIoT platform for global manufacturing and telecommunications clients (ThingWorx business acquired by Velotic effective Oct 2026).",
+      context: "Multi-region Azure/AWS engineering supporting enterprise cloud-native platforms for global manufacturing and telecommunications clients.",
       achievements: [
-        "Architect, deploy, and manage multi-region Azure and AWS cloud infrastructure supporting enterprise ThingWorx IIoT deployments, sustaining 100% compliance with corporate security and governance.",
+        "Architect, deploy, and manage multi-region Azure and AWS cloud infrastructure supporting enterprise cloud-native deployments, sustaining 100% compliance with corporate security and governance.",
         "Design modular, reusable Terraform and Bicep Infrastructure-as-Code templates to standardize cloud resource provisioning across production and non-production environments, cutting deployment cycle time by 30%.",
         "Build and maintain CI/CD pipelines using Jenkins, Git, and Bitbucket Pipelines, enabling zero-downtime, repeatable releases for global engineering teams; deploy Kubernetes workloads using Helm and ArgoCD (GitOps).",
         "Manage Kubernetes clusters (AKS, EKS) and containerized applications; troubleshoot pods, networking, ingress, load balancing, and scaling issues under high-traffic production demands.",
         "Key member of DevSecOps team supporting 100+ application teams across Wireline and Wireless domains, provisioning and managing Azure environments through Cloud Provisioner (a Terraform & Helm automation tool).",
         "Automate routine cloud operations and incident remediation using Python, Bash, and PowerShell scripts integrated with ServiceNow and JIRA.",
       ],
-      skills: ["Azure AKS", "AWS EKS", "Terraform", "Bicep", "Helm", "ArgoCD", "Jenkins", "Python", "ThingWorx IIoT"],
+      skills: ["Azure AKS", "AWS EKS", "Terraform", "Bicep", "Helm", "ArgoCD", "Jenkins", "Python", "DevOps & SRE"],
     },
     {
       id: "ptc-specialist",
@@ -79,7 +79,7 @@ export const PROFILE_DATA = {
       period: "Oct 2025 – Sep 2026",
       location: "Remote",
       type: "Full-Time",
-      context: "Enterprise ThingWorx IIoT platform cloud operations, automation engineering, and application onboarding.",
+      context: "Enterprise cloud platform operations, automation engineering, and microservice application onboarding.",
       achievements: [
         "Authored and maintained Terraform modules for Azure infrastructure and Helm charts for Kubernetes application deployments.",
         "Onboarded new MSAI Kubernetes instances on Azure Kubernetes Service (AKS) and developed CI/CD pipelines for multiple frontend and backend applications.",

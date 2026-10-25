@@ -85,7 +85,7 @@ export const ExperienceSection: React.FC = () => {
             Professional Experience & Cloud Leadership
           </h2>
           <p className={`mt-3 text-base ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-            A track record of stabilizing enterprise IIoT platforms, architecting multi-region infrastructure,
+            A track record of stabilizing enterprise cloud platforms, architecting multi-region infrastructure,
             and establishing DevSecOps best practices across global teams.
           </p>
         </div>

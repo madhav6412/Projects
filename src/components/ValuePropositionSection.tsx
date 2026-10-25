@@ -102,7 +102,7 @@ export const ValuePropositionSection: React.FC = () => {
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Enterprise Track Record:</strong> Specialist at Velotic and PTC supporting industrial ThingWorx IIoT platforms and 100+ application teams.
+                    <strong>Enterprise Track Record:</strong> Specialist at Velotic and PTC supporting enterprise cloud-native platforms and 100+ application teams.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">

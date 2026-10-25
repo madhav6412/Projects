@@ -7,7 +7,7 @@ An interactive, production-grade DevOps and Site Reliability Engineering portfol
 ### User Review & Critical Decisions
 
 > [!IMPORTANT]
-> The projects currently listed in your resume's "Projects" section only cover basic IaC, basic AKS containerization, and operations scripts. Based on your clarification, we will build **5 brand-new, enterprise-scale projects** derived from your real-world work across multi-region infrastructure, DevSecOps gating, ThingWorx IIoT reliability, cross-subscription load balancing, and SLO noise reduction.
+> The projects currently listed in your resume's "Projects" section only cover basic IaC, basic AKS containerization, and operations scripts. Based on your clarification, we will build **5 brand-new, enterprise-scale projects** derived from your real-world work across multi-region infrastructure, DevSecOps gating, enterprise cloud platform reliability, cross-subscription load balancing, and SLO noise reduction.
 
 - **Confirmed Decision 1**: Add 5 advanced enterprise DevOps projects demonstrating multi-cluster GitOps, automated DevSecOps compliance, production SRE telemetry & SLOs, zero-downtime canary delivery, and the Multi-Cloud "Cloud Provisioner" IaC framework.
 - **Confirmed Decision 2**: Provide full GitHub repository file suites for each project directly in the portfolio—including interactive folder trees, syntax-highlighted Dockerfiles, CI/CD pipeline workflows (GitHub Actions & Jenkinsfiles), Terraform & Bicep IaC, Helm charts, Python/Bash scripts, and comprehensive architectural documentation.
@@ -46,7 +46,7 @@ A high-performance portfolio application built for Senior Cloud Engineers, DevOp
      - *Repo Files*: `.github/workflows/devsecops-gate.yml`, `Dockerfile.hardened`, `policies/disallow-root-user.yaml`, `security/security-headers.conf`, `scripts/vulnerability-gate.sh`, `README.md`.
    - **Project 3: Production SRE Observability Stack & SLI/SLO Noise Reduction Engine**
      - *Scope*: Multi-window multi-burn-rate alerting, automated telemetry correlation, 25% on-call alert fatigue reduction, RCA incident post-mortems.
-     - *Repo Files*: `prometheus/slo-alerts.yml`, `grafana/dashboards/iiot-golden-signals.json`, `docker-compose.yml`, `scripts/alert_deduplication.py`, `runbooks/P0-ClusterOutage-RCA.md`, `README.md`.
+     - *Repo Files*: `prometheus/slo-alerts.yml`, `grafana/dashboards/cloud-golden-signals.json`, `docker-compose.yml`, `scripts/alert_deduplication.py`, `runbooks/P0-ClusterOutage-RCA.md`, `README.md`.
    - **Project 4: Zero-Downtime Progressive Canary Delivery Engine**
      - *Scope*: Argo Rollouts with automated metric analysis, automated rollback on 5xx spike, traffic splitting with Azure App Gateway / NGINX Ingress.
      - *Repo Files*: `.github/workflows/canary-release.yml`, `k8s/rollout-spec.yaml`, `k8s/analysis-template.yaml`, `scripts/traffic_validation.sh`, `Dockerfile`, `README.md`.

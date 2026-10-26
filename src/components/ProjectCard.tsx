@@ -184,14 +184,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-1 text-[10px]">
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={`flex items-center gap-1 text-[10px] hover:text-emerald-400 transition-colors ${
+                isDark ? 'text-slate-400' : 'text-slate-500'
+              }`}
+              title="View repository on GitHub"
+            >
               <span className={`w-1.5 h-1.5 rounded-full ${
                 repoStats.isLive ? 'bg-emerald-500 animate-pulse' : 'bg-sky-500'
               }`} />
-              <span className={`font-mono ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+              <span className="font-mono">
                 {repoStats.isLive ? 'GitHub API Live' : 'GitHub Synced'}
               </span>
-            </div>
+              <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+            </a>
           </div>
 
           {/* Key Metrics Strip */}
@@ -314,7 +323,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </button>
           </div>
 
-          {/* In-browser repo viewer & verified GitHub profile link */}
+          {/* In-browser repo viewer & direct GitHub repository link */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => onOpenRepo(project)}
@@ -327,17 +336,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </button>
             <span className={isDark ? 'text-slate-700' : 'text-slate-300'}>·</span>
             <a
-              href="https://github.com/madhav6412"
+              href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className={`text-xs flex items-center gap-1 transition-colors font-mono ${
-                isDark ? 'text-slate-400 hover:text-emerald-400' : 'text-slate-500 hover:text-emerald-600'
+              className={`text-xs flex items-center gap-1.5 transition-colors font-mono px-2 py-1 rounded border font-medium ${
+                isDark
+                  ? 'text-emerald-400 hover:text-emerald-300 bg-emerald-950/40 hover:bg-emerald-900/60 border-emerald-800/60'
+                  : 'text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border-emerald-200 shadow-xs'
               }`}
-              title="Visit Madhav's verified GitHub profile (@madhav6412)"
+              title={`Open ${project.title} on GitHub`}
             >
               <Github className="w-3.5 h-3.5" />
-              <span>@madhav6412</span>
-              <ExternalLink className="w-2.5 h-2.5" />
+              <span>View on GitHub</span>
+              <ExternalLink className="w-2.5 h-2.5 opacity-80" />
             </a>
           </div>
         </div>

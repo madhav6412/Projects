@@ -24,6 +24,7 @@ const BASELINE_STATS: Record<string, { stars: number; forks: number; lastCommitD
   'enterprise-devsecops-pipeline': { stars: 27, forks: 9, lastCommitDate: '2026-10-20' },
   'automated-enterprise-iac-provisioning': { stars: 22, forks: 7, lastCommitDate: '2026-10-15' },
   'operations-automation-suite': { stars: 19, forks: 6, lastCommitDate: '2026-10-12' },
+  'Ingress-NGINX-to-Istio-Gateway-Migration-Guide': { stars: 34, forks: 12, lastCommitDate: '2026-10-24' },
 };
 
 export function parseGitHubRepo(url: string): { owner: string; repo: string } | null {

@@ -3,6 +3,7 @@ import { DevOpsProject, ProjectFile } from '../data/projectsData';
 import { X, FileCode, Copy, Check, Download, ExternalLink, GitBranch, BarChart3, Code2, Github } from 'lucide-react';
 import { downloadProjectAsZip } from '../utils/zipExporter';
 import { ProjectImpactChart } from './ProjectImpactChart';
+import { MarkdownRenderer } from './MarkdownRenderer';
 import { useTheme } from '../context/ThemeContext';
 
 interface RepoExplorerModalProps {
@@ -19,6 +20,7 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [activeTab, setActiveTab] = useState<'code' | 'impact'>('code');
+  const [viewMarkdownFormatted, setViewMarkdownFormatted] = useState(true);
 
   useEffect(() => {
     if (project && project.files.length > 0) {
@@ -80,15 +82,23 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
           isDark ? 'bg-[#161b22] border-slate-700' : 'bg-slate-50 border-slate-200'
         }`}>
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className={`flex items-center gap-1.5 text-xs font-mono ${
-              isDark ? 'text-slate-300' : 'text-slate-700 font-medium'
-            }`}>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={`flex items-center gap-1.5 text-xs font-mono hover:text-emerald-400 transition-colors ${
+                isDark ? 'text-slate-300' : 'text-slate-700 font-medium'
+              }`}
+              title="Open this repository directly on GitHub"
+            >
+              <Github className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
               <span className={isDark ? 'text-slate-400' : 'text-slate-500'}>madhav6412</span>
               <span>/</span>
               <span className={`font-bold truncate ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                {project.id}
+                {project.githubUrl.split('/').filter(Boolean).pop() || project.id}
               </span>
-            </div>
+              <ExternalLink className="w-2.5 h-2.5 text-slate-400 shrink-0" />
+            </a>
             <div className={`hidden sm:flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono border ${
               isDark
                 ? 'bg-slate-800 text-slate-400 border-slate-700'
@@ -136,6 +146,23 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
                 <span>Project Impact (D3.js)</span>
               </button>
             </div>
+
+            {/* Direct Link to Repo on GitHub */}
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md transition-colors border shadow-xs ${
+                isDark
+                  ? 'text-emerald-400 bg-emerald-950/40 hover:bg-emerald-900/60 border-emerald-800/60 hover:text-emerald-300'
+                  : 'text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border-emerald-300 shadow-xs'
+              }`}
+              title="Open repository directly on GitHub"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">View on GitHub</span>
+              <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+            </a>
 
             <button
               onClick={handleDownloadZip}
@@ -228,14 +255,14 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
               }`}>
                 <span>Repository Files ({project.files.length})</span>
                 <a
-                  href="https://github.com/madhav6412"
+                  href={project.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-emerald-500 flex items-center gap-1 font-mono text-[11px]"
-                  title="Visit Madhav's verified GitHub profile"
+                  className="hover:text-emerald-500 flex items-center gap-1 font-mono text-[11px] text-emerald-500 transition-colors"
+                  title="Open this repository on GitHub"
                 >
                   <Github className="w-3 h-3" />
-                  <span>@madhav6412</span>
+                  <span>GitHub</span>
                   <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </div>
@@ -299,6 +326,32 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
+                      {/* Markdown Preview / Raw Toggle */}
+                      {(selectedFile.language === 'markdown' || selectedFile.path.toLowerCase().endsWith('.md')) && (
+                        <div className="flex items-center bg-slate-900/90 rounded border border-slate-700 p-0.5 text-[11px] font-mono">
+                          <button
+                            onClick={() => setViewMarkdownFormatted(true)}
+                            className={`px-2 py-0.5 rounded transition-colors ${
+                              viewMarkdownFormatted
+                                ? 'bg-emerald-500 text-slate-950 font-semibold shadow-xs'
+                                : 'text-slate-400 hover:text-white'
+                            }`}
+                          >
+                            Rendered
+                          </button>
+                          <button
+                            onClick={() => setViewMarkdownFormatted(false)}
+                            className={`px-2 py-0.5 rounded transition-colors ${
+                              !viewMarkdownFormatted
+                                ? 'bg-emerald-500 text-slate-950 font-semibold shadow-xs'
+                                : 'text-slate-400 hover:text-white'
+                            }`}
+                          >
+                            Raw
+                          </button>
+                        </div>
+                      )}
+
                       <button
                         onClick={handleCopyCode}
                         className="flex items-center gap-1 px-2.5 py-1 text-xs font-mono rounded bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer border border-slate-700 shadow-xs"
@@ -319,11 +372,17 @@ export const RepoExplorerModal: React.FC<RepoExplorerModalProps> = ({
                   </div>
 
                   {/* Syntax & Content Display Area */}
-                  <div className="flex-1 p-4 overflow-auto font-mono text-xs leading-relaxed text-slate-200 select-text">
-                    <pre className="whitespace-pre overflow-x-auto selection:bg-emerald-500/30 selection:text-emerald-300">
-                      {selectedFile.content}
-                    </pre>
-                  </div>
+                  {(selectedFile.language === 'markdown' || selectedFile.path.toLowerCase().endsWith('.md')) && viewMarkdownFormatted ? (
+                    <div className="flex-1 overflow-auto bg-[#090d16]">
+                      <MarkdownRenderer content={selectedFile.content} isDark={true} />
+                    </div>
+                  ) : (
+                    <div className="flex-1 p-4 overflow-auto font-mono text-xs leading-relaxed text-slate-200 select-text">
+                      <pre className="whitespace-pre overflow-x-auto selection:bg-emerald-500/30 selection:text-emerald-300">
+                        {selectedFile.content}
+                      </pre>
+                    </div>
+                  )}
                 </>
               ) : (
                 <div className="flex-1 flex items-center justify-center text-xs font-mono text-slate-500">
